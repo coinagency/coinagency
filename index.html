@@ -179,12 +179,16 @@ header h1 { color:#00CED1; font-size:4em; margin-bottom:15px; letter-spacing:2px
   .gallery img { width:calc(45% - 10px); } 
   .tally-embed{max-width:100%;height:600px;} 
 
-  /* VIDEO MOBILE */
+  /* VIDEO MOBILE AMÉLIORÉ */
   .video-container div {
-    height:300px; /* hauteur réduite sur mobile */
-    box-shadow:0 0 35px rgba(0,206,209,0.7); /* lueur bleu adaptée */
+    width:90%;       /* plus large */
+    height:350px;    /* plus haute */
+    margin:0 auto;
+    box-shadow:0 0 50px rgba(0,206,209,0.7); /* lueur proportionnelle */
+    border-radius:20px;
   }
   .video-container iframe {
+    width:100%;
     height:100%;
   }
 }
