@@ -133,6 +133,7 @@ header h1 { color:#00CED1; font-size:4em; margin-bottom:15px; letter-spacing:2px
 
 /* CONTACT STYLÉ */
 #contact { padding:60px 20px; text-align:center; }
+#contact h2 { margin-bottom:30px; }
 .contact-info {
   display:flex;
   flex-wrap:wrap;
@@ -180,29 +181,22 @@ header h1 { color:#00CED1; font-size:4em; margin-bottom:15px; letter-spacing:2px
   cursor:pointer;
 }
 
-/* RESPONSIVE MOBILE */
-@media(max-width:900px){ 
-  .gallery img { width:calc(30% - 10px); } 
-  .tally-embed{max-width:550px;height:700px;} 
-}
+/* RESPONSIVE */
+@media(max-width:1200px){ .gallery img { width:calc(22% - 10px); } }
+@media(max-width:900px){ .gallery img { width:calc(30% - 10px); } .tally-embed{max-width:550px;height:700px;} }
 @media(max-width:600px){ 
   .gallery img { width:calc(45% - 10px); } 
   .tally-embed{max-width:100%;height:600px;} 
 
-  /* VIDEO MOBILE 16/9 */
+  /* VIDEO MOBILE AMÉLIORÉ */
   .video-container div {
     width:95%;
-    height:0;
-    padding-bottom:56.25%; /* 16/9 ratio */
-    position:relative;
+    height:270px; /* 16/9 sur mobile */
     margin:0 auto;
-    border-radius:20px;
     box-shadow:0 0 50px rgba(0,206,209,0.7);
+    border-radius:20px;
   }
   .video-container iframe {
-    position:absolute;
-    top:0;
-    left:0;
     width:100%;
     height:100%;
   }
@@ -229,7 +223,6 @@ header h1 { color:#00CED1; font-size:4em; margin-bottom:15px; letter-spacing:2px
       src="https://player.vimeo.com/video/1150361959?autoplay=1&muted=0&title=0&byline=0&portrait=0&badge=0" 
       frameborder="0" 
       allow="autoplay; fullscreen; picture-in-picture" 
-      style="position:absolute;top:0;left:0;width:100%;height:100%; border-radius:20px;" 
       title="Présentation de Coin Agency">
     </iframe>
   </div>
@@ -289,9 +282,9 @@ header h1 { color:#00CED1; font-size:4em; margin-bottom:15px; letter-spacing:2px
 <section class="cards-section fade-up">
   <h2>Qui sommes-nous ?</h2>
   <div class="flex-cards">
-    <div class="card"><strong>Arno</strong> Communication, gestion de l’équipe, bien-être des participants</div>
-    <div class="card"><strong>Melvyn</strong> Expert memecoins et formateur</div>
-    <div class="card"><strong>Ibra</strong> Marketing et gestion interne</div>
+    <div class="card"><strong>Arno</strong><br>Communication, gestion de l’équipe, bien-être des participants</div>
+    <div class="card"><strong>Melvyn</strong><br>Expert memecoins et formateur</div>
+    <div class="card"><strong>Ibra</strong><br>Marketing et gestion interne</div>
   </div>
 </section>
 
@@ -330,14 +323,17 @@ header h1 { color:#00CED1; font-size:4em; margin-bottom:15px; letter-spacing:2px
 
 <!-- JS -->
 <script>
+// PNL LIGHTBOX
 const imgs = document.querySelectorAll('.gallery img');
 const lb = document.getElementById('lightbox');
 const lbImg = document.getElementById('lightbox-img');
-imgs.forEach(img=>{ img.onclick=()=>{ lb.style.display='flex'; lbImg.src=img.src; }});
+imgs.forEach(img=>{ img.onclick=()=>{ lb.style.display='flex'; lbImg.src=img.src; }} );
 lb.onclick=()=>{ lb.style.display='none'; };
 
 // FADE-UP ANIMATIONS
-const observer = new IntersectionObserver(entries=>{ entries.forEach(entry=>{ if(entry.isIntersecting){ entry.target.classList.add('visible'); } });});
+const observer = new IntersectionObserver(entries=>{
+  entries.forEach(entry=>{ if(entry.isIntersecting){ entry.target.classList.add('visible'); } });
+});
 document.querySelectorAll('.fade-up').forEach(el=>observer.observe(el));
 </script>
 
