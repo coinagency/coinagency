@@ -45,14 +45,6 @@ header h1 { color:#00CED1; font-size:4em; margin-bottom:15px; letter-spacing:2px
   box-shadow:0 0 50px rgba(0,206,209,0.7);
   overflow:hidden;
 }
-.video-container iframe {
-  position:absolute;
-  top:0;
-  left:0;
-  width:100%;
-  height:100%;
-  border-radius:20px;
-}
 
 /* GALERIE PNL */
 #galerie-clients {
@@ -126,6 +118,7 @@ header h1 { color:#00CED1; font-size:4em; margin-bottom:15px; letter-spacing:2px
   transition:all 0.3s;
 }
 .card:hover { transform:translateY(-6px); box-shadow:0 0 40px rgba(0,206,209,0.8); }
+.card strong { display:block; font-weight:800; margin-bottom:5px; }
 
 /* AVIS CLIENTS */
 .review-stars { color: #FFD700; font-size:1.2em; margin-bottom:8px; }
@@ -133,7 +126,6 @@ header h1 { color:#00CED1; font-size:4em; margin-bottom:15px; letter-spacing:2px
 
 /* CONTACT STYLÉ */
 #contact { padding:60px 20px; text-align:center; }
-#contact h2 { margin-bottom:30px; }
 .contact-info {
   display:flex;
   flex-wrap:wrap;
@@ -153,10 +145,7 @@ header h1 { color:#00CED1; font-size:4em; margin-bottom:15px; letter-spacing:2px
   transition:all 0.3s;
   text-align:center;
 }
-.contact-btn:hover {
-  transform:scale(1.05);
-  box-shadow:0 0 25px #00CED1;
-}
+.contact-btn:hover { transform:scale(1.05); box-shadow:0 0 25px #00CED1; }
 .discord-btn { background: linear-gradient(135deg,#5865F2,#404EED); color:#fff !important; }
 .call-btn { background:#00CED1; color:#0b0b0f; }
 
@@ -190,13 +179,21 @@ header h1 { color:#00CED1; font-size:4em; margin-bottom:15px; letter-spacing:2px
 
   /* VIDEO MOBILE AMÉLIORÉ */
   .video-container div {
-    width:95%;
-    height:270px; /* 16/9 sur mobile */
+    width:95%;       /* plus large sur mobile */
+    height:0;
+    padding-bottom:56.25%; /* 16/9 ratio */
     margin:0 auto;
     box-shadow:0 0 50px rgba(0,206,209,0.7);
     border-radius:20px;
+    opacity:0;
+    transform:scale(0.95);
+    transition:opacity 1s ease, transform 1s ease;
   }
+  .video-container div.visible { opacity:1; transform:scale(1); }
   .video-container iframe {
+    position:absolute;
+    top:0;
+    left:0;
     width:100%;
     height:100%;
   }
@@ -292,9 +289,9 @@ header h1 { color:#00CED1; font-size:4em; margin-bottom:15px; letter-spacing:2px
 <section class="cards-section fade-up">
   <h2>FAQ</h2>
   <div class="flex-cards">
-    <div class="card"><strong>Qu’est-ce qu’un memecoin ?</strong>Un memecoin est une cryptomonnaie inspirée d’un mème ou d’une blague. Sa valeur repose surtout sur la communauté et la popularité.</div>
-    <div class="card"><strong>Qu’est-ce que la “track de dev” ?</strong>Retrouver les wallets des meilleurs développeurs pour entrer avant le Contract Address (CA).</div>
-    <div class="card"><strong>Au bout de combien de temps peut-on être rentable ?</strong>Il est possible d’être rentable dès le premier mois, selon l’investissement et l’implication dans l’accompagnement.</div>
+    <div class="card"><strong>Qu’est-ce qu’un memecoin ?</strong><br>Un memecoin est une cryptomonnaie inspirée d’un mème ou d’une blague. Sa valeur repose surtout sur la communauté et la popularité.</div>
+    <div class="card"><strong>Qu’est-ce que la “track de dev” ?</strong><br>Retrouver les wallets des meilleurs développeurs pour entrer avant le Contract Address (CA).</div>
+    <div class="card"><strong>Au bout de combien de temps peut-on être rentable ?</strong><br>Il est possible d’être rentable dès le premier mois, selon l’investissement et l’implication dans l’accompagnement.</div>
   </div>
 </section>
 
@@ -327,14 +324,21 @@ header h1 { color:#00CED1; font-size:4em; margin-bottom:15px; letter-spacing:2px
 const imgs = document.querySelectorAll('.gallery img');
 const lb = document.getElementById('lightbox');
 const lbImg = document.getElementById('lightbox-img');
-imgs.forEach(img=>{ img.onclick=()=>{ lb.style.display='flex'; lbImg.src=img.src; }} );
+imgs.forEach(img=>{ img.onclick=()=>{ lb.style.display='flex'; lbImg.src=img.src; }});
 lb.onclick=()=>{ lb.style.display='none'; };
 
 // FADE-UP ANIMATIONS
-const observer = new IntersectionObserver(entries=>{
-  entries.forEach(entry=>{ if(entry.isIntersecting){ entry.target.classList.add('visible'); } });
-});
+const observer = new IntersectionObserver(entries=>{ entries.forEach(entry=>{ if(entry.isIntersecting){ entry.target.classList.add('visible'); } }); });
 document.querySelectorAll('.fade-up').forEach(el=>observer.observe(el));
+
+// VIDEO MOBILE ANIMATION
+const videoContainer = document.querySelector('.video-container div');
+const mobileObserver = new IntersectionObserver(entries=>{
+  entries.forEach(entry=>{
+    if(entry.isIntersecting){ entry.target.classList.add('visible'); }
+  });
+});
+mobileObserver.observe(videoContainer);
 </script>
 
 </body>
