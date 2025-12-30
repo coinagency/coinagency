@@ -34,10 +34,19 @@ header h1 { color:#00CED1; font-size:4em; margin-bottom:15px; letter-spacing:2px
 .chiffres div span { color:#00CED1; font-size:2.5em; font-weight:700; display:block; margin-bottom:5px; }
 
 /* VIDEO */
-.video-container { display:flex; justify-content:center; margin:60px 0; }
-iframe { width:80%; max-width:900px; height:500px; border-radius:20px; border:none; box-shadow:0 0 50px rgba(0,206,209,0.5); }
+.video-container { padding:60px 20px; text-align:center; }
+.video-container div {
+  position:relative; 
+  width:80%; 
+  max-width:900px; 
+  height:500px; 
+  margin:0 auto; 
+  border-radius:20px; 
+  box-shadow:0 0 50px rgba(0,206,209,0.7);
+  overflow:hidden;
+}
 
-/* GALERIE FIXE PNL */
+/* GALERIE PNL */
 #galerie-clients {
   padding:60px 20px;
   text-align:center;
@@ -51,7 +60,7 @@ iframe { width:80%; max-width:900px; height:500px; border-radius:20px; border:no
   margin-top:30px;
 }
 .gallery img {
-  width:calc(14% - 10px); /* 7 images sur 1 ligne */
+  width:calc(14% - 10px);
   max-width:180px;
   height:auto;
   border-radius:10px;
@@ -84,9 +93,19 @@ iframe { width:80%; max-width:900px; height:500px; border-radius:20px; border:no
 }
 #ebook h2 { color:#00CED1; margin-bottom:20px; font-size:2.3em; }
 #ebook p { font-size:1.2em; margin-bottom:25px; }
-#ebook a.btn { font-size:1.1em; }
+#ebook a.btn {
+  background:#00CED1;
+  color:#0b0b0f;
+  padding:15px 30px;
+  border-radius:20px;
+  font-weight:700;
+  display:inline-block;
+  transition:all 0.3s;
+  box-shadow:0 0 20px #00CED1;
+}
+#ebook a.btn:hover { transform:scale(1.05); box-shadow:0 0 35px #00CED1; }
 
-/* EQUIPE & FAQ */
+/* EQUIPE & FAQ & AVIS CLIENTS */
 .cards-section { padding:70px 20px; text-align:center; }
 .cards-section h2 { margin-bottom:50px; font-size:2.3em; color:#00CED1; }
 .flex-cards { display:flex; flex-wrap:wrap; justify-content:center; gap:20px; max-width:1000px; margin:0 auto; }
@@ -99,19 +118,64 @@ iframe { width:80%; max-width:900px; height:500px; border-radius:20px; border:no
   transition:all 0.3s;
 }
 .card:hover { transform:translateY(-6px); box-shadow:0 0 40px rgba(0,206,209,0.8); }
-.card strong { display:block; font-size:1.1em; margin-bottom:6px; }
 
-/* CONTACT */
+/* AVIS CLIENTS */
+.review-stars { color: #FFD700; font-size:1.2em; margin-bottom:8px; }
+.review-name { margin-top:10px; font-weight:600; color:#00CED1; }
+
+/* CONTACT STYLÉ */
 #contact { padding:60px 20px; text-align:center; }
-.contact-info { display:flex; flex-direction:column; gap:12px; max-width:500px; margin:0 auto; text-align:center; }
-.contact-info a, .contact-info span { display:block; font-weight:600; }
-.btn { background:#00CED1; color:#0b0b0f; padding:15px 30px; border-radius:20px; font-weight:700; margin-top:15px; display:inline-block; transition:all 0.3s; }
-.btn:hover { transform:scale(1.05); box-shadow:0 0 25px #00CED1; }
+.contact-info {
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:center;
+  gap:20px;
+  max-width:700px;
+  margin:0 auto;
+  text-align:center;
+}
+.contact-btn {
+  background:#111;
+  color:#00CED1;
+  padding:12px 22px;
+  border-radius:20px;
+  font-weight:700;
+  display:inline-block;
+  transition:all 0.3s;
+  text-align:center;
+}
+.contact-btn:hover {
+  transform:scale(1.05);
+  box-shadow:0 0 25px #00CED1;
+}
+.discord-btn { background: linear-gradient(135deg,#5865F2,#404EED); color:#fff !important; }
+.call-btn { background:#00CED1; color:#0b0b0f; }
+
+/* LIGHTBOX PNL */
+.lightbox {
+  position: fixed;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  background:rgba(0,0,0,0.9);
+  display:none;
+  align-items:center;
+  justify-content:center;
+  z-index:9999;
+}
+.lightbox img {
+  max-width:90%;
+  max-height:90%;
+  border-radius:15px;
+  box-shadow:0 0 40px #00CED1;
+  cursor:pointer;
+}
 
 /* RESPONSIVE */
 @media(max-width:1200px){ .gallery img { width:calc(22% - 10px); } }
-@media(max-width:900px){ .gallery img { width:calc(30% - 10px); } .tally-embed { max-width:550px; height:700px; } }
-@media(max-width:600px){ .gallery img { width:calc(45% - 10px); } .tally-embed { max-width:100%; height:600px; } }
+@media(max-width:900px){ .gallery img { width:calc(30% - 10px); } .tally-embed{max-width:550px;height:700px;} }
+@media(max-width:600px){ .gallery img { width:calc(45% - 10px); } .tally-embed{max-width:100%;height:600px;} }
 </style>
 </head>
 <body>
@@ -129,48 +193,79 @@ iframe { width:80%; max-width:900px; height:500px; border-radius:20px; border:no
 
 <!-- VIDEO -->
 <section class="video-container">
-  <iframe src="https://www.youtube.com/embed/TON_VIDEO_ID" allowfullscreen></iframe>
+  <div>
+    <iframe 
+      src="https://player.vimeo.com/video/1150361959?autoplay=1&muted=0&title=0&byline=0&portrait=0&badge=0&autopause=0&player_id=0&app_id=58479" 
+      frameborder="0" 
+      allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share" 
+      style="position:absolute;top:0;left:0;width:100%;height:100%; border-radius:20px;" 
+      title="Présentation de Coin Agency">
+    </iframe>
+  </div>
+  <script src="https://player.vimeo.com/api/player.js"></script>
 </section>
 
-<!-- GALERIE -->
+<!-- GALERIE PNL -->
 <section id="galerie-clients">
   <h2>Nos preuves & visuels clients</h2>
   <div class="gallery">
-    <img src="https://i.postimg.cc/fSZ0616y/dqdsefegerg.png" alt="Preuve 1">
-    <img src="https://i.postimg.cc/D4FbtRtS/erezrzefze.png" alt="Preuve 2">
-    <img src="https://i.postimg.cc/GTrsZ6Z9/jikuyjkyuky.png" alt="Preuve 3">
-    <img src="https://i.postimg.cc/YLkmJTJh/telecharger.png" alt="Preuve 4">
-    <img src="https://i.postimg.cc/bS82K4Kb/token-pnl-2.png" alt="Preuve 5">
-    <img src="https://i.postimg.cc/XB3yTtTC/token-pnl-33.png" alt="Preuve 6">
-    <img src="https://i.postimg.cc/p5xng3gn/token-pnl-38.png" alt="Preuve 7">
+    <img src="https://i.postimg.cc/fSZ0616y/dqdsefegerg.png">
+    <img src="https://i.postimg.cc/D4FbtRtS/erezrzefze.png">
+    <img src="https://i.postimg.cc/GTrsZ6Z9/jikuyjkyuky.png">
+    <img src="https://i.postimg.cc/YLkmJTJh/telecharger.png">
+    <img src="https://i.postimg.cc/bS82K4Kb/token-pnl-2.png">
+    <img src="https://i.postimg.cc/XB3yTtTC/token-pnl-33.png">
+    <img src="https://i.postimg.cc/p5xng3gn/token-pnl-38.png">
   </div>
 </section>
 
 <!-- FORMULAIRE -->
 <section id="formulaire">
   <h2>Votre questionnaire</h2>
-  <iframe src="https://tally.so/r/Pdp9E0?utm_source=ig&utm_medium=social&utm_content=link_in_bio" class="tally-embed"></iframe>
+  <iframe src="https://tally.so/r/Pdp9E0" class="tally-embed"></iframe>
 </section>
 
 <!-- EBOOK -->
 <section id="ebook">
   <h2>Ebook offert</h2>
-  <p>Recevez notre Ebook offert pour comprendre les memecoins !</p>
-  <a href="https://www.canva.com/design/DAG69rVoEwg/BVuFgoMtAhoIoaCTZQD2sw/view?utm_content=DAG69rVoEwg&utm_campaign=designshare&utm_medium=link2&utm_source=uniquelinks&utlId=hcf65d14779" target="_blank" class="btn">Télécharger l’Ebook</a>
+  <p>Comprendre les memecoins simplement</p>
+  <a href="https://www.canva.com/design/DAG69rVoEwg/BVuFgoMtAhoIoaCTZQD2sw/view" target="_blank" class="btn">Télécharger l’Ebook</a>
+</section>
+
+<!-- AVIS CLIENTS -->
+<section class="cards-section fade-up">
+  <h2>Avis clients</h2>
+  <div class="flex-cards">
+    <div class="card">
+      <div class="review-stars">★★★★★</div>
+      <p>Accompagnement très clair. J’ai appris à analyser un memecoin sans suivre le hype.</p>
+      <div class="review-name">Lucas M.</div>
+    </div>
+    <div class="card">
+      <div class="review-stars">★★★★★</div>
+      <p>Méthode structurée, communauté sérieuse, aucune promesse bullshit.</p>
+      <div class="review-name">Enzo R.</div>
+    </div>
+    <div class="card">
+      <div class="review-stars">★★★★☆</div>
+      <p>Très bon suivi, surtout pour comprendre la track de dev.</p>
+      <div class="review-name">Maxime D.</div>
+    </div>
+  </div>
 </section>
 
 <!-- QUI SOMMES-NOUS -->
-<section class="cards-section">
+<section class="cards-section fade-up">
   <h2>Qui sommes-nous ?</h2>
   <div class="flex-cards">
-    <div class="card"><strong>Arno</strong>Communication, gestion de l’équipe, bien-être des participants</div>
-    <div class="card"><strong>Melvyn</strong>Expert memecoins et formateur</div>
-    <div class="card"><strong>Ibra</strong>Marketing et gestion interne</div>
+    <div class="card"><strong>Arno</strong> Communication, gestion de l’équipe, bien-être des participants</div>
+    <div class="card"><strong>Melvyn</strong> Expert memecoins et formateur</div>
+    <div class="card"><strong>Ibra</strong> Marketing et gestion interne</div>
   </div>
 </section>
 
 <!-- FAQ -->
-<section class="cards-section">
+<section class="cards-section fade-up">
   <h2>FAQ</h2>
   <div class="flex-cards">
     <div class="card"><strong>Qu’est-ce qu’un memecoin ?</strong>Un memecoin est une cryptomonnaie inspirée d’un mème ou d’une blague. Sa valeur repose surtout sur la communauté et la popularité.</div>
@@ -179,16 +274,44 @@ iframe { width:80%; max-width:900px; height:500px; border-radius:20px; border:no
   </div>
 </section>
 
-<!-- CONTACT -->
+<!-- CONTACT CENTRÉ -->
 <section id="contact">
+  <h2>Nous contacter</h2>
   <div class="contact-info">
-    <span>Instagram : <a href="https://instagram.com/arno.dwe" target="_blank">@arno.dwe</a></span>
-    <span>Instagram : <a href="https://instagram.com/coinagency.mmc" target="_blank">@coinagency.mmc</a></span>
-    <span>Téléphone : 0786705803</span>
-    <span>Email : <a href="mailto:agencycoin522@gmail.com">agencycoin522@gmail.com</a></span>
-    <a href="https://www.youtube.com/@coinagencyfr" class="btn" target="_blank">Chaîne YouTube</a>
+    <a href="https://instagram.com/arno.dwe" target="_blank" class="contact-btn">📸 Instagram Arno</a>
+    <a href="https://instagram.com/coinagency.mmc" target="_blank" class="contact-btn">📸 Instagram CoinAgency</a>
+    <a href="https://discord.gg/XrMeDauTRE" target="_blank" class="contact-btn discord-btn">💬 Rejoindre Discord</a>
+    <a href="tel:0786705803" class="contact-btn call-btn">📞 Appeler 07 86 70 58 03</a>
+    <a href="mailto:agencycoin522@gmail.com" class="contact-btn">✉ Email</a>
+    <a href="https://www.youtube.com/@coinagencyfr" target="_blank" class="contact-btn btn">▶ Chaîne YouTube</a>
   </div>
 </section>
+
+<!-- FOOTER -->
+<footer style="text-align:center; padding:20px 0; color:#888; font-size:0.9em; background:#080808; margin-top:40px;">
+  &copy; 2026 Coin Agency
+</footer>
+
+<!-- LIGHTBOX -->
+<div class="lightbox" id="lightbox">
+  <img src="" id="lightbox-img">
+</div>
+
+<!-- JS -->
+<script>
+// PNL LIGHTBOX
+const imgs = document.querySelectorAll('.gallery img');
+const lb = document.getElementById('lightbox');
+const lbImg = document.getElementById('lightbox-img');
+imgs.forEach(img=>{ img.onclick=()=>{ lb.style.display='flex'; lbImg.src=img.src; }});
+lb.onclick=()=>{ lb.style.display='none'; };
+
+// FADE-UP ANIMATIONS
+const observer = new IntersectionObserver(entries=>{
+  entries.forEach(entry=>{ if(entry.isIntersecting){ entry.target.classList.add('visible'); } });
+});
+document.querySelectorAll('.fade-up').forEach(el=>observer.observe(el));
+</script>
 
 </body>
 </html>
